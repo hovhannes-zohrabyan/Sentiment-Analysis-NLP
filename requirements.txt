@@ -1,0 +1,11 @@
+nltk
+pyenchant
+matplotlib
+numpy
+wordcloud
+sklearn
+tensorflow
+gensim
+pandas
+flask
+keras
