@@ -1,9 +1,9 @@
 from nltk.tokenize import word_tokenize
 from controller.data_controller import DataRW
-from controller.VoteClassifier import VoteClassifier
+from model.vote_classifier import VoteClassifier
 
 
-class SentimentAnalysis:
+class SentimentAnalysisModel:
 
     def __init__(self):
         print("sentiment Analysis")
@@ -17,11 +17,14 @@ class SentimentAnalysis:
         base_classifier = self.dp.read_data_pickle("trained_model", "base_classifier")
         mnb_classifier = self.dp.read_data_pickle("trained_model", "mnb_classifier")
         bernoulli_nb_classifier = self.dp.read_data_pickle("trained_model", "bernoulli_nb_classifier")
-        logistic_regression_classifier = self.dp.read_data_pickle("trained_model", "logistic_regression_classifier")
-        linear_svc_classifier = self.dp.read_data_pickle("trained_model", "linear_svc_classifier")
-        sgdc_classifier = self.dp.read_data_pickle("trained_model", "sgdc_classifier")
+        # logistic_regression_classifier = self.dp.read_data_pickle("trained_model", "logistic_regression_classifier")
+        # linear_svc_classifier = self.dp.read_data_pickle("trained_model", "linear_svc_classifier")
+        # sgdc_classifier = self.dp.read_data_pickle("trained_model", "sgdc_classifier")
 
-        return [base_classifier, mnb_classifier, bernoulli_nb_classifier, logistic_regression_classifier, linear_svc_classifier, sgdc_classifier]
+
+        return [base_classifier, mnb_classifier, bernoulli_nb_classifier,
+                # logistic_regression_classifier, linear_svc_classifier, sgdc_classifier
+        ]
 
     def find_features(self, document):
         words = word_tokenize(document)
@@ -33,5 +36,5 @@ class SentimentAnalysis:
 
     def sent_analyze(self, text):
         feats = self.find_features(text)
-        return self.vote_classifier.classify(feats), self.vote_classifier.confidence(feats)
+        return self.vote_classifier.predict(feats), self.vote_classifier.confidence(feats)
 
